@@ -44,5 +44,14 @@ namespace BatchRenamer
 			var wordText = button.Content.ToString();
 			viewModel.Output = viewModel.Output.RunOperationForEachLine(name => FileRenameOperations.ToggleWord(name, wordText));
 		}
+
+		private void Replace_Click(object sender, RoutedEventArgs e)
+		{
+			var replaceDialog = new ReplaceDialog(output.SelectedText);
+			if (replaceDialog.ShowDialog() == true)
+			{
+				viewModel.Output = viewModel.Output.Replace(replaceDialog.SearchText, replaceDialog.ReplaceText);
+			}
+		}
 	}
 }

@@ -54,11 +54,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DelegateCommand.cs" />
     <Compile Include="FileRenameOperations.cs" />
-    <Compile Include="Replace.xaml.cs">
-      <DependentUpon>Replace.xaml</DependentUpon>
+    <Compile Include="ReplaceDialog.xaml.cs">
+      <DependentUpon>ReplaceDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextLineTools.cs" />
+    <Compile Include="UpdateViewModel.cs" />
     <Compile Include="Words.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -73,7 +75,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Replace.xaml">
+    <Page Include="ReplaceDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

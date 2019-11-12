@@ -13,14 +13,17 @@
 		Top="{Binding Source={x:Static p:Settings.Default}, Path=Top, Mode=TwoWay}"
 		Closing="Window_Closing" FocusManager.FocusedElement="{Binding ElementName=output}">
 	<Window.Resources>
+		<BooleanToVisibilityConverter x:Key="BoolToVis" />
 		<local:Words x:Key="words"/>
+		<local:UpdateViewModel x:Key="update"/>
 	</Window.Resources>
 	<DockPanel>
 		<ToolBarTray DockPanel.Dock="Top">
 			<!-- Settings -->
 			<ToolBar>
-				<Button Click="Clear">Clear</Button>
 				<Button Click="Rename">Rename</Button>
+				<Button Click="Clear">Clear</Button>
+				<Button Click="Replace_Click">Replace...</Button>
 				<CheckBox IsChecked="{Binding IgnoreExtension}">ignoreExtension</CheckBox>
 			</ToolBar>
 			<ToolBar DataContext="{DynamicResource words}" ItemsSource="{Binding Items}">
@@ -32,6 +35,15 @@
 			</ToolBar>
 			<!-- Commands -->
 		</ToolBarTray>
+		<StatusBar DockPanel.Dock="Bottom">
+			<Button DataContext="{DynamicResource update}" Visibility="{Binding Available, Converter={StaticResource BoolToVis}}"
+					Command="{Binding Command}">
+				Update available!
+			</Button>
+			<!--<TextBlock Text="Count:"/>
+			<TextBlock Text="{Binding InputFiles.Count, Mode=OneWay}"/>-->
+			<Label Content="{Binding InputFiles.Count, Mode=OneWay}" ContentStringFormat="Count:{0}"/>
+		</StatusBar>
 		<Grid>
 			<!--main client area-->
 			<Grid.ColumnDefinitions>
