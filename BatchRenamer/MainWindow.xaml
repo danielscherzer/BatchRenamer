@@ -3,10 +3,48 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:p="clr-namespace:BatchRenamer.Properties"
         xmlns:local="clr-namespace:BatchRenamer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Batch Renamer"
+		Height="{Binding Source={x:Static p:Settings.Default}, Path=Height, Mode=TwoWay}"
+		Width="{Binding Source={x:Static p:Settings.Default}, Path=Width, Mode=TwoWay}"
+		Left="{Binding Source={x:Static p:Settings.Default}, Path=Left, Mode=TwoWay}"
+		Top="{Binding Source={x:Static p:Settings.Default}, Path=Top, Mode=TwoWay}"
+		Closing="Window_Closing" FocusManager.FocusedElement="{Binding ElementName=output}">
+	<Window.Resources>
+		<local:Words x:Key="words"/>
+	</Window.Resources>
+	<DockPanel>
+		<ToolBarTray DockPanel.Dock="Top">
+			<!-- Settings -->
+			<ToolBar>
+				<Button Click="Clear">Clear</Button>
+				<Button Click="Rename">Rename</Button>
+				<CheckBox IsChecked="{Binding IgnoreExtension}">ignoreExtension</CheckBox>
+			</ToolBar>
+			<ToolBar DataContext="{DynamicResource words}" ItemsSource="{Binding Items}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Button Content="{Binding}" Click="Word_Click"/>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ToolBar>
+			<!-- Commands -->
+		</ToolBarTray>
+		<Grid>
+			<!--main client area-->
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="10" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<ListBox Grid.Column="0" AllowDrop="True" SelectionMode="Extended" Drop="InputList_Drop"
+						 ItemsSource="{Binding InputFiles}">
+			</ListBox>
+			<GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+			<TextBox Name="output" Grid.Column="2" AcceptsReturn="True" Text="{Binding Output}" 
+				 TextBlock.LineHeight="20" TextBlock.LineStackingStrategy="BlockLineHeight" />
+		</Grid>
+	</DockPanel>
 </Window>

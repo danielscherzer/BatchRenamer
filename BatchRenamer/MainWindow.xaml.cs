@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BatchRenamer
 {
@@ -20,9 +8,41 @@ namespace BatchRenamer
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		private MainViewModel viewModel;
+
 		public MainWindow()
 		{
 			InitializeComponent();
+			viewModel = new MainViewModel();
+			DataContext = viewModel;
+		}
+
+		private void Clear(object sender, RoutedEventArgs e) => viewModel.InputFiles.Clear();
+
+		private void InputList_Drop(object sender, DragEventArgs e)
+		{
+			var fileNames = (string[])e.Data.GetData(DataFormats.FileDrop);
+			foreach (var fileName in fileNames)
+			{
+				viewModel.InputFiles.Add(fileName);
+			}
+		}
+
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			viewModel.Save();
+		}
+
+		private void Rename(object sender, RoutedEventArgs e)
+		{
+			viewModel.Rename();
+		}
+
+		private void Word_Click(object sender, RoutedEventArgs e)
+		{
+			var button = sender as Button;
+			var wordText = button.Content.ToString();
+			viewModel.Output = viewModel.Output.RunOperationForEachLine(name => FileRenameOperations.ToggleWord(name, wordText));
 		}
 	}
 }
