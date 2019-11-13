@@ -8,9 +8,10 @@ namespace BatchRenamer
 	/// </summary>
 	public partial class ReplaceDialog : Window
 	{
-		public ReplaceDialog(string searchText)
+		public ReplaceDialog(string searchText, Window owner)
 		{
 			InitializeComponent();
+			Owner = owner;
 			this.searchText.Text = searchText;
 		}
 

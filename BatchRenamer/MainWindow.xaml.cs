@@ -38,20 +38,34 @@ namespace BatchRenamer
 			viewModel.Rename();
 		}
 
+		private void Positions_Click(object sender, RoutedEventArgs e)
+		{
+			var editPositionsDialog = new EditPositionsDialog(viewModel.Output.ToLines(), this); // owner for centering on owner
+			if (editPositionsDialog.ShowDialog() == true)
+			{
+				viewModel.Output = editPositionsDialog.Output.JoinIntoString();
+			}
+		}
+
+		private void Replace_Click(object sender, RoutedEventArgs e)
+		{
+			var replaceDialog = new ReplaceDialog(output.SelectedText, this); // owner for centering on owner
+			if (replaceDialog.ShowDialog() == true)
+			{
+				viewModel.Output = viewModel.Output.Replace(replaceDialog.SearchText, replaceDialog.ReplaceText);
+			}
+		}
+
+		private void Undo_Click(object sender, RoutedEventArgs e)
+		{
+			viewModel.Undo();
+		}
+
 		private void Word_Click(object sender, RoutedEventArgs e)
 		{
 			var button = sender as Button;
 			var wordText = button.Content.ToString();
 			viewModel.Output = viewModel.Output.RunOperationForEachLine(name => FileRenameOperations.ToggleWord(name, wordText));
-		}
-
-		private void Replace_Click(object sender, RoutedEventArgs e)
-		{
-			var replaceDialog = new ReplaceDialog(output.SelectedText);
-			if (replaceDialog.ShowDialog() == true)
-			{
-				viewModel.Output = viewModel.Output.Replace(replaceDialog.SearchText, replaceDialog.ReplaceText);
-			}
 		}
 	}
 }

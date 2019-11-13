@@ -24,6 +24,8 @@
 				<Button Click="Rename">Rename</Button>
 				<Button Click="Clear">Clear</Button>
 				<Button Click="Replace_Click">Replace...</Button>
+				<Button Click="Positions_Click">Positions...</Button>
+				<Button Click="Undo_Click">Undo</Button>
 				<CheckBox IsChecked="{Binding IgnoreExtension}">ignoreExtension</CheckBox>
 			</ToolBar>
 			<ToolBar DataContext="{DynamicResource words}" ItemsSource="{Binding Items}">

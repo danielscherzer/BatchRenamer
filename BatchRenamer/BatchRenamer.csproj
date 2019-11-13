@@ -55,6 +55,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DelegateCommand.cs" />
+    <Compile Include="EditPositionsDialog.xaml.cs">
+      <DependentUpon>EditPositionsDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FileRenameOperations.cs" />
     <Compile Include="ReplaceDialog.xaml.cs">
       <DependentUpon>ReplaceDialog.xaml</DependentUpon>
@@ -62,6 +65,10 @@
     <Compile Include="TextLineTools.cs" />
     <Compile Include="UpdateViewModel.cs" />
     <Compile Include="Words.cs" />
+    <Page Include="EditPositionsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

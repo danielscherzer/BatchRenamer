@@ -28,7 +28,7 @@ namespace BatchRenamer
 		public string Output
 		{
 			get => _output;
-			set => SetNotify(ref _output, value);
+			set => SetNotify(ref _output, value, undoBuffer.Push);
 		}
 
 		public bool IgnoreExtension
@@ -37,19 +37,7 @@ namespace BatchRenamer
 			set => SetNotify(ref _ignoreExt, value, v => InputFiles_CollectionChanged(InputFiles, null));
 		}
 
-		internal void Save()
-		{
-			Settings.Default.InputFiles = new System.Collections.Specialized.StringCollection();
-			Settings.Default.InputFiles.AddRange(InputFiles.ToArray());
-			Settings.Default.Output = Output;
-			Settings.Default.IgnoreExtension = IgnoreExtension;
-			Settings.Default.Save();
-		}
-
-		private string _output;
-		private bool _ignoreExt;
-
-		internal void Rename()
+		public void Rename()
 		{
 			var savedOutput = Output;
 			var outputFileNames = Output.ToLines();
@@ -64,6 +52,26 @@ namespace BatchRenamer
 			}
 			Output = savedOutput;
 		}
+
+		public void Save()
+		{
+			Settings.Default.InputFiles = new System.Collections.Specialized.StringCollection();
+			Settings.Default.InputFiles.AddRange(InputFiles.ToArray());
+			Settings.Default.Output = Output;
+			Settings.Default.IgnoreExtension = IgnoreExtension;
+			Settings.Default.Save();
+		}
+
+		public void Undo()
+		{
+			if (2 > undoBuffer.Count) return;
+			undoBuffer.Pop();
+			Output = undoBuffer.Pop();
+		}
+
+		private string _output;
+		private bool _ignoreExt;
+		private Stack<string> undoBuffer = new Stack<string>();
 
 		private static bool Rename(string input, string output)
 		{
