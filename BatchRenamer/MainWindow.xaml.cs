@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Reflection;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace BatchRenamer
@@ -15,6 +16,8 @@ namespace BatchRenamer
 			InitializeComponent();
 			viewModel = new MainViewModel();
 			DataContext = viewModel;
+			var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+			Title += $" {currentVersion}";
 		}
 
 		private void Clear(object sender, RoutedEventArgs e) => viewModel.InputFiles.Clear();
