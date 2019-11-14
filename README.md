@@ -1,6 +1,6 @@
 # Batch Renamer
 
-
+[![Build status](https://ci.appveyor.com/api/projects/status/dl7g78up6o75dtn1?svg=true)](https://ci.appveyor.com/project/danielscherzer/batchrenamer)
 
 ---------------------------------------
 
