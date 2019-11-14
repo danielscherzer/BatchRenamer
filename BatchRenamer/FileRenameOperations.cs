@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace BatchRenamer
 {
@@ -7,7 +9,7 @@ namespace BatchRenamer
 	{
 		public static string Encase(this string word)
 		{
-			return "(" + word + ")";
+			return $"({word})";
 		}
 
 		public static string CleanupEncase(this string text)
@@ -20,6 +22,31 @@ namespace BatchRenamer
 			var newFileName = fileName.Replace('.', ' ');
 			newFileName = newFileName.Replace('_', ' ');
 			return newFileName;
+		}
+
+		public static string FormatWords(this string fileName, IEnumerable<string> definedWords)
+		{
+			int startMeta = fileName.Length;
+			var splitInput = fileName.SplitIntoWords(new char[] { ' ', '(', ')' });
+			var words = new List<string>();
+			foreach (var word in definedWords)
+			{
+				if (splitInput.Contains(word))
+				{
+					words.Add(word);
+					// find first meta data word
+					startMeta = Math.Min(startMeta, fileName.IndexOf(word) - 1);
+				}
+			}
+			definedWords.Select((item, index) => (index, item)).ToDictionary(item => item.index, item => item.item);
+			var sb = new StringBuilder();
+			sb.Append(fileName.Substring(0, startMeta).Trim());
+			foreach (var word in words)
+			{
+				sb.Append(' ');
+				sb.Append(word.Encase());
+			}
+			return sb.ToString().TrimEnd();
 		}
 
 		public static string FormatYear(this string fileName)

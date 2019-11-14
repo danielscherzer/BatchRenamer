@@ -1,99 +1,49 @@
 ﻿using BatchRenamer.Properties;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
+using System.ComponentModel;
 using System.Linq;
-using Zenseless.Patterns;
 
 namespace BatchRenamer
 {
-	class MainViewModel : NotifyPropertyChanged
+	class MainViewModel : INotifyPropertyChanged
 	{
-		public MainViewModel()
+		private Model model;
+
+		internal MainViewModel()
 		{
-			_ignoreExt = Settings.Default.IgnoreExtension;
-			InputFiles = new ObservableCollection<string>(Settings.Default.InputFiles.Cast<string>());
-			Output = Settings.Default.Output;
-			InputFiles.CollectionChanged += InputFiles_CollectionChanged;
+			model = new Model(Settings.Default.IgnoreExtension, Settings.Default.InputFiles.Cast<string>(), Settings.Default.Output);
+			Words = new Words();
+			model.PropertyChanged += (s, e) => PropertyChanged?.Invoke(this, e);
 		}
 
-		private void InputFiles_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-		{
-			Output = string.Join(Environment.NewLine, InputFiles.Select(filePath => _ignoreExt ? Path.GetFileNameWithoutExtension(filePath) : Path.GetFileName(filePath)));
-		}
-
-		//TODO: Add InputFiles to undoBuffer?
-		public ObservableCollection<string> InputFiles { get; }
-
-		public string Output
-		{
-			get => _output;
-			set => SetNotify(ref _output, value, undoBuffer.Push);
-		}
+		public ObservableCollection<string> InputFiles => model.InputFiles;
 
 		public bool IgnoreExtension
 		{
-			get => _ignoreExt;
-			set => SetNotify(ref _ignoreExt, value, v => InputFiles_CollectionChanged(InputFiles, null));
+			get => model.IgnoreExtension;
+			set => model.IgnoreExtension = value;
 		}
-
-		public void Rename()
+		public string Output
 		{
-			var savedOutput = Output;
-			var outputFileNames = Output.ToLines();
-			var renamePairs = InputFiles.Zip(outputFileNames, (input, output) => (input, output)).ToArray();
-			InputFiles.Clear();
-			foreach (var (input, output) in renamePairs)
-			{
-				var dir = Path.GetDirectoryName(input);
-				var ext = _ignoreExt ? Path.GetExtension(input) : string.Empty;
-				var outputPath = $"{dir}{Path.DirectorySeparatorChar}{output}{ext}";
-				InputFiles.Add(Rename(input, outputPath) ? outputPath : input);
-			}
-			Output = savedOutput;
+			get => model.Output;
+			set => model.Output = value;
 		}
 
-		public void Save()
+		public Words Words { get; }
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		internal void Rename() => model.Rename();
+
+		internal void Save()
 		{
 			Settings.Default.InputFiles = new System.Collections.Specialized.StringCollection();
-			Settings.Default.InputFiles.AddRange(InputFiles.ToArray());
-			Settings.Default.Output = Output;
-			Settings.Default.IgnoreExtension = IgnoreExtension;
+			Settings.Default.InputFiles.AddRange(model.InputFiles.ToArray());
+			Settings.Default.Output = model.Output;
+			Settings.Default.IgnoreExtension = model.IgnoreExtension;
 			Settings.Default.Save();
 		}
 
-		public void Undo()
-		{
-			if (2 > undoBuffer.Count) return;
-			undoBuffer.Pop();
-			Output = undoBuffer.Pop();
-		}
-
-		private string _output;
-		private bool _ignoreExt;
-		private Stack<string> undoBuffer = new Stack<string>();
-
-		private static bool Rename(string input, string output)
-		{
-			if (input == output) return true;
-			try
-			{
-				if (File.Exists(input))
-				{
-					File.Move(input, output);
-				}
-				else
-				{
-					//assume directory
-					Directory.Move(input, output);
-				}
-				return true;
-			}
-			catch
-			{
-				return false;
-			}
-		}
+		internal void Undo() => model.Undo();
 	}
 }

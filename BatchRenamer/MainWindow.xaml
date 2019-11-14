@@ -57,10 +57,9 @@
 				<Button Click="FormatYear_Click">Format Year</Button>
 				<CheckBox IsChecked="{Binding IgnoreExtension}">ignoreExtension</CheckBox>
 			</ToolBar>
-			<ToolBar DataContext="{DynamicResource words}" ItemsSource="{Binding Items}" Band="1">
+			<ToolBar ItemsSource="{Binding Words.Items}" Band="1">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<!--<MenuItem Header="{Binding}" Click="Word_Click"/>-->
 						<Button Content="{Binding}" Click="Word_Click"/>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>

@@ -68,6 +68,11 @@ namespace BatchRenamer
 			viewModel.Undo();
 		}
 
+		//private void FormatYear_Click(object sender, RoutedEventArgs e)
+		//{
+		//	viewModel.Output = viewModel.Output.RunOperationForEachLine(line => FileRenameOperations.FormatWords(line, wor));
+		//}
+
 		private void FormatYear_Click(object sender, RoutedEventArgs e)
 		{
 			viewModel.Output = viewModel.Output.RunOperationForEachLine(FileRenameOperations.FormatYear);
@@ -76,7 +81,7 @@ namespace BatchRenamer
 		private void Word_Click(object sender, RoutedEventArgs e)
 		{
 			var button = sender as Button;
-			var wordText = button.Content.ToString();
+			var wordText = button.Content.ToString().Encase();
 			viewModel.Output = viewModel.Output.RunOperationForEachLine(name => FileRenameOperations.ToggleWord(name, wordText));
 		}
 	}
