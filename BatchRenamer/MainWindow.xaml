@@ -5,32 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:p="clr-namespace:BatchRenamer.Properties"
         xmlns:local="clr-namespace:BatchRenamer"
-        mc:Ignorable="d"
-        Title="Batch Renamer"
+        mc:Ignorable="d" Title="Batch Renamer"
+		 Icon="/BatchRenamer;component/Icons/rename.png"
 		Height="{Binding Source={x:Static p:Settings.Default}, Path=Height, Mode=TwoWay}"
 		Width="{Binding Source={x:Static p:Settings.Default}, Path=Width, Mode=TwoWay}"
 		Left="{Binding Source={x:Static p:Settings.Default}, Path=Left, Mode=TwoWay}"
 		Top="{Binding Source={x:Static p:Settings.Default}, Path=Top, Mode=TwoWay}"
 		Closing="Window_Closing" FocusManager.FocusedElement="{Binding ElementName=output}">
 	<Window.Resources>
-		<BooleanToVisibilityConverter x:Key="BoolToVis" />
+		<BooleanToVisibilityConverter x:Key="BoolToVis"/>
 		<local:Words x:Key="words"/>
 		<local:UpdateViewModel x:Key="update"/>
+
+		<Style TargetType="Image">
+			<Setter Property="Width" Value="16"/>
+			<Setter Property="Height" Value="16"/>
+			<Setter Property="RenderOptions.BitmapScalingMode" Value="Fant"/>
+			<Style.Triggers>
+				<Trigger Property="IsEnabled" Value="False">
+					<Setter Property="Opacity" Value="0.5" />
+				</Trigger>
+			</Style.Triggers>
+		</Style>
 	</Window.Resources>
 	<DockPanel>
 		<ToolBarTray DockPanel.Dock="Top">
 			<!-- Settings -->
 			<ToolBar>
-				<Button Click="Rename">Rename</Button>
-				<Button Click="Clear">Clear</Button>
-				<Button Click="Replace_Click">Replace...</Button>
-				<Button Click="Positions_Click">Positions...</Button>
-				<Button Click="Undo_Click">Undo</Button>
+				<Button Click="Rename">
+					<Button.ToolTip>Save new names to disc</Button.ToolTip>
+					<Image Source="/BatchRenamer;component/Icons/SaveAll.png" />
+				</Button>
+				<Button Click="Clear">
+					<Button.ToolTip>Clear</Button.ToolTip>
+					<Image Source="/BatchRenamer;component/Icons/ClearWindowContent.png" />
+				</Button>
+				<Button Click="Replace_Click">
+					<Button.ToolTip>Find and replace all...</Button.ToolTip>
+					<Image Source="/BatchRenamer;component/Icons/ReplaceAll.png" />
+				</Button>
+				<Button Click="Positions_Click">
+					<Button.ToolTip>Positions...</Button.ToolTip>
+					<Image Source="/BatchRenamer;component/Icons/PositionPage.png" />
+				</Button>
+				<Button Click="Undo_Click">
+					<Button.ToolTip>Undo</Button.ToolTip>
+					<Image Source="/BatchRenamer;component/Icons/Undo.png" />
+				</Button>
+			</ToolBar>
+			<ToolBar>
+				<Button Click="FormatYear_Click">Format Year</Button>
 				<CheckBox IsChecked="{Binding IgnoreExtension}">ignoreExtension</CheckBox>
 			</ToolBar>
-			<ToolBar DataContext="{DynamicResource words}" ItemsSource="{Binding Items}">
+			<ToolBar DataContext="{DynamicResource words}" ItemsSource="{Binding Items}" Band="1">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
+						<!--<MenuItem Header="{Binding}" Click="Word_Click"/>-->
 						<Button Content="{Binding}" Click="Word_Click"/>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
@@ -53,12 +83,12 @@
 				<ColumnDefinition Width="10" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
-			<ListBox Grid.Column="0" AllowDrop="True" SelectionMode="Extended" Drop="InputList_Drop"
-						 ItemsSource="{Binding InputFiles}">
+			<ListBox Grid.Column="0" AllowDrop="True" SelectionMode="Extended" Drop="InputList_Drop" DragOver="InputList_DragOver"
+				ItemsSource="{Binding InputFiles}">
 			</ListBox>
 			<GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-			<TextBox Name="output" Grid.Column="2" AcceptsReturn="True" Text="{Binding Output}" 
-				 TextBlock.LineHeight="20" TextBlock.LineStackingStrategy="BlockLineHeight" />
+			<TextBox Name="output" Grid.Column="2" AcceptsReturn="True" Text="{Binding Output, UpdateSourceTrigger=PropertyChanged}" 
+				TextBlock.LineHeight="20" TextBlock.LineStackingStrategy="BlockLineHeight" />
 		</Grid>
 	</DockPanel>
 </Window>

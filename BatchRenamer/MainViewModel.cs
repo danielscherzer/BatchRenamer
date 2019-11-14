@@ -23,6 +23,7 @@ namespace BatchRenamer
 			Output = string.Join(Environment.NewLine, InputFiles.Select(filePath => _ignoreExt ? Path.GetFileNameWithoutExtension(filePath) : Path.GetFileName(filePath)));
 		}
 
+		//TODO: Add InputFiles to undoBuffer?
 		public ObservableCollection<string> InputFiles { get; }
 
 		public string Output

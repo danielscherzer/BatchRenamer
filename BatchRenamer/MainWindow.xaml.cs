@@ -19,9 +19,16 @@ namespace BatchRenamer
 
 		private void Clear(object sender, RoutedEventArgs e) => viewModel.InputFiles.Clear();
 
-		private void InputList_Drop(object sender, DragEventArgs e)
+		private void InputList_DragOver(object sender, DragEventArgs dragInfo)
 		{
-			var fileNames = (string[])e.Data.GetData(DataFormats.FileDrop);
+			dragInfo.Effects = dragInfo.KeyStates.HasFlag(DragDropKeyStates.ControlKey) ? DragDropEffects.Copy : DragDropEffects.Move;
+			dragInfo.Handled = true;
+		}
+
+		private void InputList_Drop(object sender, DragEventArgs dragInfo)
+		{
+			var fileNames = (string[])dragInfo.Data.GetData(DataFormats.FileDrop);
+			if (!dragInfo.KeyStates.HasFlag(DragDropKeyStates.ControlKey)) viewModel.InputFiles.Clear();
 			foreach (var fileName in fileNames)
 			{
 				viewModel.InputFiles.Add(fileName);
@@ -59,6 +66,11 @@ namespace BatchRenamer
 		private void Undo_Click(object sender, RoutedEventArgs e)
 		{
 			viewModel.Undo();
+		}
+
+		private void FormatYear_Click(object sender, RoutedEventArgs e)
+		{
+			viewModel.Output = viewModel.Output.RunOperationForEachLine(FileRenameOperations.FormatYear);
 		}
 
 		private void Word_Click(object sender, RoutedEventArgs e)

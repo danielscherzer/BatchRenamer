@@ -126,5 +126,17 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\ClearWindowContent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\PositionPage.png" />
+    <Resource Include="icons\Rename.png" />
+    <Resource Include="icons\ReplaceAll.png" />
+    <Resource Include="icons\Undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\SaveAll.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
