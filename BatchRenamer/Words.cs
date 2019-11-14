@@ -11,7 +11,7 @@ namespace BatchRenamer
 		{
 			try
 			{
-				Items = File.ReadAllText("Words.txt").Split(new string[] { Environment.NewLine, " ", "\t" }, StringSplitOptions.RemoveEmptyEntries);
+				Items = File.ReadAllText("Words.txt").Split(new string[] { "\n", "\r", " ", "\t" }, StringSplitOptions.RemoveEmptyEntries);
 			}
 			catch
 			{
