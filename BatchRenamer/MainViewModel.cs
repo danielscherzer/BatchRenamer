@@ -1,4 +1,6 @@
 ﻿using BatchRenamer.Properties;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -12,7 +14,7 @@ namespace BatchRenamer
 		internal MainViewModel()
 		{
 			model = new Model(Settings.Default.IgnoreExtension, Settings.Default.InputFiles.Cast<string>(), Settings.Default.Output);
-			Words = new Words();
+			words = new Words();
 			model.PropertyChanged += (s, e) => PropertyChanged?.Invoke(this, e);
 		}
 
@@ -23,15 +25,22 @@ namespace BatchRenamer
 			get => model.IgnoreExtension;
 			set => model.IgnoreExtension = value;
 		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		public string Output
 		{
 			get => model.Output;
 			set => model.Output = value;
 		}
 
-		public Words Words { get; }
+		private readonly Words words;
+		public IEnumerable<string> Words => words.Items;
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		internal void FormatYear()
+		{
+			model.Output = model.Output.RunOperationForEachLine(FileRenameOperations.FormatYear);
+		}
 
 		internal void Rename() => model.Rename();
 
@@ -44,6 +53,22 @@ namespace BatchRenamer
 			Settings.Default.Save();
 		}
 
+		internal void ToggleWord(string word)
+		{
+			var wordText = word.Encase();
+			model.Output = model.Output.RunOperationForEachLine(name => FileRenameOperations.ToggleWord(name, wordText));
+		}
+
 		internal void Undo() => model.Undo();
+
+		internal void FormatWords()
+		{
+			model.Output = model.Output.RunOperationForEachLine(line => FileRenameOperations.FormatWords(line, Words));
+		}
+
+		internal void CleanupSpaces()
+		{
+			model.Output = model.Output.RunOperationForEachLine(FileRenameOperations.CleanupSpaces);
+		}
 	}
 }

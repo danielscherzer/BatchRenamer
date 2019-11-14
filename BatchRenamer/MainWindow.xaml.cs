@@ -71,21 +71,25 @@ namespace BatchRenamer
 			viewModel.Undo();
 		}
 
-		//private void FormatYear_Click(object sender, RoutedEventArgs e)
-		//{
-		//	viewModel.Output = viewModel.Output.RunOperationForEachLine(line => FileRenameOperations.FormatWords(line, wor));
-		//}
+		private void FormatWords_Click(object sender, RoutedEventArgs e)
+		{
+			viewModel.FormatWords();
+		}
 
 		private void FormatYear_Click(object sender, RoutedEventArgs e)
 		{
-			viewModel.Output = viewModel.Output.RunOperationForEachLine(FileRenameOperations.FormatYear);
+			viewModel.FormatYear();
 		}
 
 		private void Word_Click(object sender, RoutedEventArgs e)
 		{
 			var button = sender as Button;
-			var wordText = button.Content.ToString().Encase();
-			viewModel.Output = viewModel.Output.RunOperationForEachLine(name => FileRenameOperations.ToggleWord(name, wordText));
+			viewModel.ToggleWord(button.Content.ToString());
+		}
+
+		private void CleanupSpaces_Click(object sender, RoutedEventArgs e)
+		{
+			viewModel.CleanupSpaces();
 		}
 	}
 }

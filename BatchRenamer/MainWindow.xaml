@@ -54,10 +54,12 @@
 				</Button>
 			</ToolBar>
 			<ToolBar>
+				<Button Click="CleanupSpaces_Click">Cleanup spaces</Button>
+				<Button Click="FormatWords_Click">Format Words</Button>
 				<Button Click="FormatYear_Click">Format Year</Button>
 				<CheckBox IsChecked="{Binding IgnoreExtension}">ignoreExtension</CheckBox>
 			</ToolBar>
-			<ToolBar ItemsSource="{Binding Words.Items}" Band="1">
+			<ToolBar ItemsSource="{Binding Words}" Band="1">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
 						<Button Content="{Binding}" Click="Word_Click"/>

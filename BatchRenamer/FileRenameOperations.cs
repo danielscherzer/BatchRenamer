@@ -38,7 +38,8 @@ namespace BatchRenamer
 					startMeta = Math.Min(startMeta, fileName.IndexOf(word) - 1);
 				}
 			}
-			definedWords.Select((item, index) => (index, item)).ToDictionary(item => item.index, item => item.item);
+			var keySelector = definedWords.Select((word, index) => (word, index)).ToDictionary(item => item.word, item => item.index);
+			var orderedWords = words.OrderBy(name => keySelector[name]);
 			var sb = new StringBuilder();
 			sb.Append(fileName.Substring(0, startMeta).Trim());
 			foreach (var word in words)
