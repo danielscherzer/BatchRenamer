@@ -38,7 +38,7 @@ namespace BatchRenamer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("800")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
         public double Width {
             get {
                 return ((double)(this["Width"]));

@@ -60,9 +60,7 @@
 			<ToolBar ItemsSource="{Binding Words.Items}" Band="1">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<Button Click="Word_Click">
-							<TextBlock Text="{Binding}" TextWrapping="NoWrap" TextAlignment="Center"/>
-						</Button>
+						<Button Content="{Binding}" Click="Word_Click"/>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ToolBar>
