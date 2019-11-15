@@ -15,6 +15,15 @@ namespace BatchRenamer
 		{
 			model = new Model(Settings.Default.IgnoreExtension, Settings.Default.InputFiles.Cast<string>(), Settings.Default.Output);
 			words = new Words();
+			var args = Environment.GetCommandLineArgs().Skip(1);
+			if(args.Any())
+			{
+				model.InputFiles.Clear();
+				foreach (var fileName in args)
+				{
+					model.InputFiles.Add(fileName);
+				}
+			}
 			model.PropertyChanged += (s, e) => PropertyChanged?.Invoke(this, e);
 		}
 
