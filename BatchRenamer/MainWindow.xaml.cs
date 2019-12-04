@@ -13,14 +13,29 @@ namespace BatchRenamer
 
 		public MainWindow()
 		{
-			InitializeComponent();
 			viewModel = new MainViewModel();
+			InitializeComponent();
 			DataContext = viewModel;
 			var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
 			Title += $" {currentVersion}";
 		}
 
+		private void CleanupSpaces_Click(object sender, RoutedEventArgs e)
+		{
+			viewModel.CleanupSpaces();
+		}
+
 		private void Clear(object sender, RoutedEventArgs e) => viewModel.InputFiles.Clear();
+
+		private void SaveCommand_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+		{
+			viewModel.Rename();
+		}
+
+		private void SaveCommand_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = viewModel.InputFiles.Count > 0;
+		}
 
 		private void InputList_DragOver(object sender, DragEventArgs dragInfo)
 		{
@@ -41,11 +56,6 @@ namespace BatchRenamer
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			viewModel.Save();
-		}
-
-		private void Rename(object sender, RoutedEventArgs e)
-		{
-			viewModel.Rename();
 		}
 
 		private void Positions_Click(object sender, RoutedEventArgs e)
@@ -85,11 +95,6 @@ namespace BatchRenamer
 		{
 			var button = sender as Button;
 			viewModel.ToggleWord(button.Content.ToString());
-		}
-
-		private void CleanupSpaces_Click(object sender, RoutedEventArgs e)
-		{
-			viewModel.CleanupSpaces();
 		}
 	}
 }
