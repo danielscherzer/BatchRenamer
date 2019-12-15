@@ -118,10 +118,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoUpdateViaGitHubRelease">
-      <Version>0.1.27</Version>
+      <Version>0.1.28</Version>
     </PackageReference>
     <PackageReference Include="Zenseless.Patterns">
-      <Version>0.5.131</Version>
+      <Version>0.5.138</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
