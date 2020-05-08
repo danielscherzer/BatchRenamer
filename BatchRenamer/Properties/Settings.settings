@@ -24,5 +24,8 @@
     <Setting Name="IgnoreExtension" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="Counter" Type="System.String" Scope="User">
+      <Value Profile="(Default)">001</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

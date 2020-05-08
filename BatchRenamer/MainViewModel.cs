@@ -79,5 +79,13 @@ namespace BatchRenamer
 		{
 			model.Output = model.Output.RunOperationForEachLine(FileRenameOperations.CleanupSpaces);
 		}
+
+		internal void AddCounter(string text)
+		{
+			if(int.TryParse(text, out var start))
+			{
+				model.Output = model.Output.RunOperationForEachLine(name => name + start++.ToString().PadLeft(text.Length, '0'));
+			}
+		}
 	}
 }

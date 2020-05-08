@@ -96,5 +96,10 @@ namespace BatchRenamer
 			var button = sender as Button;
 			viewModel.ToggleWord(button.Content.ToString());
 		}
+
+		private void IncCounter_Click(object sender, RoutedEventArgs e)
+		{
+			viewModel.AddCounter(counter.Text);
+		}
 	}
 }
