@@ -8,6 +8,10 @@
     <Authors>Daniel Scherzer</Authors>
     <Company>DMS</Company>
   </PropertyGroup>
+  <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoUpdateViaGitHubRelease">
       <Version>0.1.30</Version>
@@ -28,5 +32,18 @@
     <Resource Include="icons\ReplaceAll.png" />
     <Resource Include="icons\Undo.png" />
     <Resource Include="icons\SaveAll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 </Project>
