@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.852
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchRenamer", "BatchRenamer\BatchRenamer.csproj", "{30210E98-306D-46EB-B984-52593C190D1D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchRenamerTests", "BatchRenamerTests\BatchRenamerTests.csproj", "{21A487D0-A715-46A5-9E37-B2BA0F1E8C2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchRenamer", "BatchRenamer\BatchRenamer.csproj", "{30210E98-306D-46EB-B984-52593C190D1D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4F197C1E-F793-4728-BD9F-AFE352DE6810}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ISSUE_TEMPLATE.md = ISSUE_TEMPLATE.md
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchRenamerTests", "BatchRenamerTests\BatchRenamerTests.csproj", "{904BD948-463E-4FD6-B7D1-595E61CB7ED1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,10 +26,10 @@ Global
 		{30210E98-306D-46EB-B984-52593C190D1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30210E98-306D-46EB-B984-52593C190D1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30210E98-306D-46EB-B984-52593C190D1D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{21A487D0-A715-46A5-9E37-B2BA0F1E8C2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{21A487D0-A715-46A5-9E37-B2BA0F1E8C2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{21A487D0-A715-46A5-9E37-B2BA0F1E8C2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{21A487D0-A715-46A5-9E37-B2BA0F1E8C2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{904BD948-463E-4FD6-B7D1-595E61CB7ED1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{904BD948-463E-4FD6-B7D1-595E61CB7ED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{904BD948-463E-4FD6-B7D1-595E61CB7ED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{904BD948-463E-4FD6-B7D1-595E61CB7ED1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
