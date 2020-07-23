@@ -21,7 +21,7 @@ namespace BatchRenamer
 		{
 			var newFileName = fileName.Replace('.', ' ');
 			newFileName = newFileName.Replace('_', ' ');
-			return newFileName;
+			return string.Join(' ', newFileName.Split(' ', StringSplitOptions.RemoveEmptyEntries)); // remove multiple and outside spaces
 		}
 
 		public static string FormatWords(this string fileName, IEnumerable<string> definedWords)
