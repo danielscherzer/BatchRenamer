@@ -22,7 +22,7 @@ build:
   verbosity: minimal              # MSBuild verbosity level
 
 artifacts:
-- path: BatchRenamer\Bin\$(configuration)
+- path: src\Bin\$(configuration)
   name: BatchRenamer
 
 deploy:
