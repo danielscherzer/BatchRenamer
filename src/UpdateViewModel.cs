@@ -24,15 +24,6 @@ namespace BatchRenamer
 			_command = new DelegateCommand(_ => UpdateAndClose(), _ => Available);
 		}
 
-		private void SetAvailable()
-		{
-			Application.Current.Dispatcher.Invoke(() =>
-			{
-				Available = true;
-				_command.RaiseCanExecuteChanged();
-			});
-		}
-
 		public bool Available { get => _available; private set => SetNotify(ref _available, value, _ => _command.RaiseCanExecuteChanged()); }
 		public ICommand Command => _command;
 

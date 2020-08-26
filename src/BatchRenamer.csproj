@@ -11,6 +11,7 @@
   <PropertyGroup>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <Copyright>2018 Daniel Scherzer</Copyright>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoUpdateViaGitHubRelease">

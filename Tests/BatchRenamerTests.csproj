@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BatchRenamer\BatchRenamer.csproj" />
+    <ProjectReference Include="..\src\BatchRenamer.csproj" />
   </ItemGroup>
 
 </Project>
