@@ -28,13 +28,13 @@ namespace BatchRenamer
 		public string Output
 		{
 			get => _output;
-			set => SetNotify(ref _output, value, undoBuffer.Push);
+			set => Set(ref _output, value, undoBuffer.Push);
 		}
 
 		public bool IgnoreExtension
 		{
 			get => _ignoreExt;
-			set => SetNotify(ref _ignoreExt, value, v => InputFiles_CollectionChanged(InputFiles, null));
+			set => Set(ref _ignoreExt, value, v => InputFiles_CollectionChanged(InputFiles, null));
 		}
 
 		public void Rename()
@@ -62,7 +62,7 @@ namespace BatchRenamer
 
 		private string _output;
 		private bool _ignoreExt;
-		private Stack<string> undoBuffer = new Stack<string>();
+		private readonly Stack<string> undoBuffer = new();
 
 		private static bool Rename(string input, string output)
 		{

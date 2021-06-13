@@ -11,12 +11,15 @@ namespace BatchRenamer
 	{
 		public UpdateViewModel()
 		{
-			var update = new Update("danielScherzer", "BatchRenamer", Assembly.GetExecutingAssembly(), Path.GetTempPath());
+			var update = new Update();
 			update.PropertyChanged += (s, a) => Available = update.Available;
+			var assembly = Assembly.GetExecutingAssembly();
+			update.CheckDownloadNewVersionAsync("danielScherzer", "BatchRenamer", assembly.GetName().Version, Path.GetTempPath());
+			
 
 			void UpdateAndClose()
 			{
-				update.Install();
+				update.Install(Path.GetDirectoryName(assembly.Location));
 				var app = Application.Current;
 				app.Shutdown();
 			}
@@ -24,7 +27,7 @@ namespace BatchRenamer
 			_command = new DelegateCommand(_ => UpdateAndClose(), _ => Available);
 		}
 
-		public bool Available { get => _available; private set => SetNotify(ref _available, value, _ => _command.RaiseCanExecuteChanged()); }
+		public bool Available { get => _available; private set => Set(ref _available, value, _ => _command.RaiseCanExecuteChanged()); }
 		public ICommand Command => _command;
 
 		private bool _available = false;
