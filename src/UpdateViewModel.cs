@@ -19,7 +19,7 @@ namespace BatchRenamer
 
 			void UpdateAndClose()
 			{
-				update.Install(Path.GetDirectoryName(assembly.Location));
+				update.StartInstall(Path.GetDirectoryName(assembly.Location));
 				var app = Application.Current;
 				app.Shutdown();
 			}

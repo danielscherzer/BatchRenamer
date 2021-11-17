@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoUpdateViaGitHubRelease" Version="0.1.47" />
-    <PackageReference Include="Zenseless.Patterns" Version="0.6.8" />
+    <PackageReference Include="AutoUpdateViaGitHubRelease" Version="0.1.51" />
+    <PackageReference Include="Zenseless.Patterns" Version="0.6.18" />
   </ItemGroup>
   
   <ItemGroup>
