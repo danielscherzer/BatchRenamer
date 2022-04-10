@@ -7,7 +7,7 @@ using Zenseless.Patterns;
 
 namespace BatchRenamer
 {
-	class UpdateViewModel : NotifyPropertyChanged
+	internal class UpdateViewModel : NotifyPropertyChanged
 	{
 		public UpdateViewModel()
 		{
@@ -27,7 +27,7 @@ namespace BatchRenamer
 			_command = new DelegateCommand(_ => UpdateAndClose(), _ => Available);
 		}
 
-		public bool Available { get => _available; private set => Set(ref _available, value, _ => _command.RaiseCanExecuteChanged()); }
+		public bool Available { get => _available; private set => Set(ref _available, value, _ => DelegateCommand.RaiseCanExecuteChanged()); }
 		public ICommand Command => _command;
 
 		private bool _available = false;
