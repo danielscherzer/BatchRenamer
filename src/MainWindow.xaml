@@ -31,9 +31,9 @@
 	<Window.CommandBindings>
 		<CommandBinding Command="Save" Executed="SaveCommand_Executed" CanExecute="SaveCommand_CanExecute"/>
 	</Window.CommandBindings>
-	<Window.InputBindings>
+	<!--<Window.InputBindings>
 		<KeyBinding Gesture="Ctrl+S" Command="{Binding Save}"/>
-	</Window.InputBindings>
+	</Window.InputBindings>-->
 	<DockPanel>
 		<ToolBarTray DockPanel.Dock="Top">
 			<!-- Settings -->
@@ -91,8 +91,8 @@
 			<TextBlock Text="{Binding InputFiles.Count, Mode=OneWay}"/>-->
 			<Label Content="{Binding InputFiles.Count, Mode=OneWay}" ContentStringFormat="Count:{0}"/>
 		</StatusBar>
+		<!--main client area-->
 		<Grid>
-			<!--main client area-->
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="10" />

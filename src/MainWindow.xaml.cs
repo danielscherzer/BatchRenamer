@@ -9,7 +9,7 @@ namespace BatchRenamer
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private MainViewModel viewModel;
+		private readonly MainViewModel viewModel;
 
 		public MainWindow()
 		{
