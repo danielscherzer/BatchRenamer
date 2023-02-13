@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using Zenseless.Patterns;
@@ -17,7 +18,7 @@ namespace BatchRenamer
 			InputFiles.CollectionChanged += InputFiles_CollectionChanged;
 		}
 
-		private void InputFiles_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		private void InputFiles_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			Output = string.Join(Environment.NewLine, InputFiles.Select(filePath => _ignoreExt ? Path.GetFileNameWithoutExtension(filePath) : Path.GetFileName(filePath)));
 		}

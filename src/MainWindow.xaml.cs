@@ -25,7 +25,7 @@ namespace BatchRenamer
 			viewModel.CleanupSpaces();
 		}
 
-		private void Clear(object sender, RoutedEventArgs e) => viewModel.InputFiles.Clear();
+		private void Clear(object sender, RoutedEventArgs e) => viewModel.Model.InputFiles.Clear();
 
 		private void SaveCommand_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
 		{
@@ -34,7 +34,7 @@ namespace BatchRenamer
 
 		private void SaveCommand_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
 		{
-			e.CanExecute = viewModel.InputFiles.Count > 0;
+			e.CanExecute = viewModel.Model.InputFiles.Count > 0;
 		}
 
 		private void InputList_DragOver(object sender, DragEventArgs dragInfo)
@@ -46,10 +46,10 @@ namespace BatchRenamer
 		private void InputList_Drop(object sender, DragEventArgs dragInfo)
 		{
 			var fileNames = (string[])dragInfo.Data.GetData(DataFormats.FileDrop);
-			if (!dragInfo.KeyStates.HasFlag(DragDropKeyStates.ControlKey)) viewModel.InputFiles.Clear();
+			if (!dragInfo.KeyStates.HasFlag(DragDropKeyStates.ControlKey)) viewModel.Model.InputFiles.Clear();
 			foreach (var fileName in fileNames)
 			{
-				viewModel.InputFiles.Add(fileName);
+				viewModel.Model.InputFiles.Add(fileName);
 			}
 		}
 
@@ -60,10 +60,10 @@ namespace BatchRenamer
 
 		private void Positions_Click(object sender, RoutedEventArgs e)
 		{
-			var editPositionsDialog = new EditPositionsDialog(viewModel.Output.ToLines(), this); // owner for centering on owner
+			var editPositionsDialog = new EditPositionsDialog(viewModel.Model.Output.ToLines(), this); // owner for centering on owner
 			if (editPositionsDialog.ShowDialog() == true)
 			{
-				viewModel.Output = editPositionsDialog.Output.JoinIntoString();
+				viewModel.Model.Output = editPositionsDialog.Output.JoinIntoString();
 			}
 		}
 
@@ -72,13 +72,13 @@ namespace BatchRenamer
 			var replaceDialog = new ReplaceDialog(output.SelectedText, this); // owner for centering on owner
 			if (replaceDialog.ShowDialog() == true)
 			{
-				viewModel.Output = viewModel.Output.Replace(replaceDialog.SearchText, replaceDialog.ReplaceText);
+				viewModel.Model.Output = viewModel.Model.Output.Replace(replaceDialog.SearchText, replaceDialog.ReplaceText);
 			}
 		}
 
 		private void Undo_Click(object sender, RoutedEventArgs e)
 		{
-			viewModel.Undo();
+			viewModel.Model.Undo();
 		}
 
 		private void FormatWords_Click(object sender, RoutedEventArgs e)

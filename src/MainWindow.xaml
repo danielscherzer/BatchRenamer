@@ -14,7 +14,6 @@
 		Closing="Window_Closing" FocusManager.FocusedElement="{Binding ElementName=output}">
 	<Window.Resources>
 		<BooleanToVisibilityConverter x:Key="BoolToVis"/>
-		<local:Words x:Key="words"/>
 		<local:UpdateViewModel x:Key="update"/>
 
 		<Style TargetType="Image">
@@ -63,7 +62,7 @@
 				<Button Click="CleanupSpaces_Click">Cleanup spaces</Button>
 				<Button Click="FormatWords_Click">Format Words</Button>
 				<Button Click="FormatYear_Click">Format Year</Button>
-				<CheckBox IsChecked="{Binding IgnoreExtension}">ignoreExtension</CheckBox>
+				<CheckBox IsChecked="{Binding Model.IgnoreExtension}">ignoreExtension</CheckBox>
 			</ToolBar>
 			<ToolBar ItemsSource="{Binding Words}" Band="1">
 				<ItemsControl.ItemTemplate>
@@ -89,7 +88,7 @@
 			</Button>
 			<!--<TextBlock Text="Count:"/>
 			<TextBlock Text="{Binding InputFiles.Count, Mode=OneWay}"/>-->
-			<Label Content="{Binding InputFiles.Count, Mode=OneWay}" ContentStringFormat="Count:{0}"/>
+			<Label Content="{Binding Model.InputFiles.Count, Mode=OneWay}" ContentStringFormat="Count:{0}"/>
 		</StatusBar>
 		<!--main client area-->
 		<Grid>
@@ -99,10 +98,10 @@
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 			<ListBox Grid.Column="0" AllowDrop="True" SelectionMode="Extended" Drop="InputList_Drop" DragOver="InputList_DragOver"
-				ItemsSource="{Binding InputFiles}">
+				ItemsSource="{Binding Model.InputFiles}">
 			</ListBox>
 			<GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-			<TextBox Name="output" Grid.Column="2" AcceptsReturn="True" Text="{Binding Output, UpdateSourceTrigger=PropertyChanged}" 
+			<TextBox Name="output" Grid.Column="2" AcceptsReturn="True" Text="{Binding Model.Output, UpdateSourceTrigger=PropertyChanged}" 
 				TextBlock.LineHeight="20" TextBlock.LineStackingStrategy="BlockLineHeight" />
 		</Grid>
 	</DockPanel>

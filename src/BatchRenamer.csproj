@@ -24,12 +24,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Resource Include="icons\ClearWindowContent.png" />
-    <Resource Include="icons\PositionPage.png" />
-    <Resource Include="icons\Rename.png" />
-    <Resource Include="icons\ReplaceAll.png" />
-    <Resource Include="icons\Undo.png" />
-    <Resource Include="icons\SaveAll.png" />
+    <Resource Include="icons\*" />
   </ItemGroup>
   
   <ItemGroup>
