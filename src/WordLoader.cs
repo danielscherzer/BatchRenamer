@@ -3,7 +3,7 @@ using System.IO;
 
 namespace BatchRenamer;
 
-class WordLoader
+internal class WordLoader
 {
 
 	public static string[] ReadFromFile()

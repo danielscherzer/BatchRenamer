@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
-using Zenseless.Patterns;
+using Zenseless.Patterns.Property;
 
 namespace BatchRenamer
 {
@@ -15,7 +15,7 @@ namespace BatchRenamer
 			update.PropertyChanged += (s, a) => Available = update.Available;
 			var assembly = Assembly.GetExecutingAssembly();
 			update.CheckDownloadNewVersionAsync("danielScherzer", "BatchRenamer", assembly.GetName().Version, Path.GetTempPath());
-			
+
 
 			void UpdateAndClose()
 			{

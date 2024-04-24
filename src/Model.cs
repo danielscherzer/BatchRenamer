@@ -4,11 +4,11 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
-using Zenseless.Patterns;
+using Zenseless.Patterns.Property;
 
 namespace BatchRenamer
 {
-	class Model : NotifyPropertyChanged
+	internal class Model : NotifyPropertyChanged
 	{
 		public Model(bool ignoreExtensions, IEnumerable<string> inputFiles, string output)
 		{

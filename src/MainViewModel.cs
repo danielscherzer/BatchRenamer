@@ -1,12 +1,11 @@
 ﻿using BatchRenamer.Properties;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 
 namespace BatchRenamer;
 
-class MainViewModel
+internal class MainViewModel
 {
 	private readonly Model model;
 
@@ -14,7 +13,7 @@ class MainViewModel
 	{
 		model = new Model(Settings.Default.IgnoreExtension, Settings.Default.InputFiles.Cast<string>(), Settings.Default.Output);
 		var args = Environment.GetCommandLineArgs().Skip(1);
-		if(args.Any())
+		if (args.Any())
 		{
 			model.InputFiles.Clear();
 			foreach (var fileName in args)
@@ -63,7 +62,7 @@ class MainViewModel
 
 	internal void AddCounter(string text)
 	{
-		if(int.TryParse(text, out var start))
+		if (int.TryParse(text, out var start))
 		{
 			model.Output = model.Output.RunOperationForEachLine(name => name + start++.ToString().PadLeft(text.Length, '0'));
 		}
