@@ -62,6 +62,7 @@
 				<Button Click="CleanupSpaces_Click">Cleanup spaces</Button>
 				<Button Click="FormatWords_Click">Format Words</Button>
 				<Button Click="FormatYear_Click">Format Year</Button>
+				<Button Click="RemoveUnicode_Click">Remove Unicode</Button>
 				<CheckBox IsChecked="{Binding Model.IgnoreExtension}">ignoreExtension</CheckBox>
 			</ToolBar>
 			<ToolBar ItemsSource="{Binding Words}" Band="1">

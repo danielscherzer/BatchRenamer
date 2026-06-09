@@ -1,32 +1,31 @@
 ﻿using System;
 using System.Windows;
 
-namespace BatchRenamer
+namespace BatchRenamer;
+
+/// <summary>
+/// Interaction logic for Replace.xaml
+/// </summary>
+public partial class ReplaceDialog : Window
 {
-	/// <summary>
-	/// Interaction logic for Replace.xaml
-	/// </summary>
-	public partial class ReplaceDialog : Window
+	public ReplaceDialog(string searchText, Window owner)
 	{
-		public ReplaceDialog(string searchText, Window owner)
-		{
-			InitializeComponent();
-			Owner = owner;
-			this.searchText.Text = searchText;
-		}
+		InitializeComponent();
+		Owner = owner;
+		this.searchText.Text = searchText;
+	}
 
-		public string SearchText => searchText.Text;
-		public string ReplaceText => replaceText.Text;
+	public string SearchText => searchText.Text;
+	public string ReplaceText => replaceText.Text;
 
-		private void Window_ContentRendered(object sender, EventArgs e)
-		{
-			searchText.SelectAll();
-			searchText.Focus();
-		}
+	private void Window_ContentRendered(object sender, EventArgs e)
+	{
+		searchText.SelectAll();
+		searchText.Focus();
+	}
 
-		private void ReplaceAll_Click(object sender, RoutedEventArgs e)
-		{
-			DialogResult = true;
-		}
+	private void ReplaceAll_Click(object sender, RoutedEventArgs e)
+	{
+		DialogResult = true;
 	}
 }

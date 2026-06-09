@@ -33,12 +33,16 @@ internal class MainViewModel
 		model.Output = model.Output.RunOperationForEachLine(FileRenameOperations.FormatYear);
 	}
 
+	internal void RemoveUnicode()
+	{
+		model.Output = model.Output.RunOperationForEachLine(FileRenameOperations.RemoveUnicode);
+	}
+
 	internal void Rename() => model.Rename();
 
 	internal void Save()
 	{
-		Settings.Default.InputFiles = new System.Collections.Specialized.StringCollection();
-		Settings.Default.InputFiles.AddRange(model.InputFiles.ToArray());
+		Settings.Default.InputFiles = [.. model.InputFiles.ToArray()];
 		Settings.Default.Output = model.Output;
 		Settings.Default.IgnoreExtension = model.IgnoreExtension;
 		Settings.Default.Save();
